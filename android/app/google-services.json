@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1043118754254",
+    "project_id": "joing-app",
+    "storage_bucket": "joing-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1043118754254:android:8e93c0abe487881814c39f",
+        "android_client_info": {
+          "package_name": "com.example.joing_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1043118754254-mhi1l5akvb0n0r1dp3149jj2l3stmk8k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1NbM76HxUUbORS9qQTD97ILcbfP_kFAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1043118754254-mhi1l5akvb0n0r1dp3149jj2l3stmk8k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
