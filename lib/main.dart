@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:joing_app/firebase_options.dart';
-import 'package:joing_app/page/star_page.dart';
+import 'package:joing_app/page/sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:get/get.dart';
+import 'package:joing_app/views/home_view.dart';
 void main()async {
   runApp(const MyApp());
   await Firebase.initializeApp(
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter staj',
         theme: ThemeData.light().copyWith(
@@ -26,6 +28,6 @@ class MyApp extends StatelessWidget {
            actionsIconTheme: IconThemeData(color: Colors.cyan)
           ),
         ),
-        home:  StarPage(),);
+        home:  HomeView(),);
   }
 }
