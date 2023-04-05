@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class StarButton extends StatelessWidget {
@@ -9,10 +7,9 @@ class StarButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: IconButton(
-        onPressed: () {
-        
-      },
-      icon: Icon(Icons.next_plan),),
+        onPressed: () {},
+        icon: const Icon(Icons.next_plan),
+      ),
     );
   }
 }

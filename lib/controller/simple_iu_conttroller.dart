@@ -25,7 +25,9 @@ class SimpleUIController extends GetxController {
   getPictureData() async {
     isLoading.value = true;
     var response = await DioService().getMethod(
-        "https://jsonplaceholder.typicode.com/posts?/users/:username/likes=JXZHmpmkPOi2khheI9OeU-Ebzb4TfxsWQMH8FUtlvsw&=");
+       // "https://api.unsplash.com/photos/?per_page=30&order_by=${orderBy.value}&client_id=$apikey"
+        'https://api.unsplash.com/photos?per_page=30&order_by=popular&client_id=JXZHmpmkPOi2khheI9OeU-Ebzb4TfxsWQMH8FUtlvsw'
+        );
     photos = RxList();
     if (response.statusCode == 200) {
       response.data.forEach((element) {

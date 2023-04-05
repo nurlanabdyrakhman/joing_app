@@ -1,20 +1,48 @@
-import 'package:flutter/material.dart';
-import 'package:joing_app/views/home_view.dart';
-import 'package:joing_app/widgets/list_widget.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:joing_app/controller/main_wrap_controller.dart';
+import 'package:joing_app/widgets/list_widget.dart';
+class MainWrapper extends StatefulWidget {
+  MainWrapper({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<MainWrapper> createState() => _MainWrapperState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  int currentIndex = 0;
- 
+class _MainWrapperState extends State<MainWrapper> {
+    int currentIndex = 0;
+
+  final MainWrapperController _mainWrapperController =
+      Get.find<MainWrapperController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Bottom AppBar Example",
+          style: Theme.of(context).textTheme.subtitle1,
+        ),
+        centerTitle: true,
+        actions: [
+          Obx(
+            () => Switch.adaptive(
+              value: _mainWrapperController.isDarkTheme.value,
+              onChanged: (newVal) {
+                _mainWrapperController.isDarkTheme.value = newVal;
+                _mainWrapperController
+                    .switchTheme(newVal ? ThemeMode.dark : ThemeMode.light);
+              },
+            ),
+          ),PageView(
+        controller: _mainWrapperController.pageController,
+        physics: const BouncingScrollPhysics(),
+        onPageChanged: _mainWrapperController.animateToTab,
+        children: [..._mainWrapperController.screen],
+      ),
+        ],
+      ),
      
       body: screen[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -54,9 +82,12 @@ class _LoginPageState extends State<LoginPage> {
         onTap: (index) {
           setState(() {
             currentIndex = index;
-          },);
+          });
         },
       ),
+      
     );
   }
+
+
 }

@@ -16,6 +16,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController emailController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
+  final urlSrc = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCCVOGJBS7_9sfAF92ZpXQYDJmwZFLPT7NLw&usqp=CAU';
   @override
   void dispose() {
     super.dispose();
@@ -25,6 +26,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -45,19 +47,19 @@ class _SignUpPageState extends State<SignUpPage> {
              
               Card(
                 
-                margin: EdgeInsets.only(top: 33,bottom: 22),
+                margin: const EdgeInsets.only(top: 33,bottom: 22),
                 child: Image.network(
-                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCCVOGJBS7_9sfAF92ZpXQYDJmwZFLPT7NLw&usqp=CAU',
+                  urlSrc,
                 ),
               ),
-               SizedBox(height: 42,),
+               const SizedBox(height: 42,),
               Padding(
-                padding:  EdgeInsets.only(bottom: 5),
+                padding:  const EdgeInsets.only(bottom: 5),
                 child: TextField(
                   controller: nameController,
                   autofocus: true,
                   decoration: InputDecoration(
-                    hintStyle: TextStyle(color: Colors.black),
+                    hintStyle: const TextStyle(color: Colors.black),
                     hintText: 'Name',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -65,34 +67,36 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 12,
               ),
               TextField(
                 controller: emailController,
                 decoration: InputDecoration(
-                  hintStyle: TextStyle(color: Colors.black),
+                  hintStyle: const TextStyle(color: Colors.black),
                   hintText: 'Email',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 12,
               ),
               TextField(
                 controller: passwordController,
+                  obscureText: true,
                 decoration: InputDecoration(
-                  hintStyle: TextStyle(color: Colors.black),
+                  hintStyle: const TextStyle(color: Colors.black),
                   hintText: 'Possword',
                   filled: true,
+                  
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 12,
               ),
               InkWell(
@@ -100,20 +104,20 @@ class _SignUpPageState extends State<SignUpPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => LoginPage(),
+                      builder: (context) => const LoginPage(),
                     ),
                   );
                 },
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 63, vertical: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 63, vertical: 8),
                   decoration: BoxDecoration(
                       color: Colors.blue,
                       border: Border.all(color: Colors.yellow),
                       borderRadius: BorderRadius.circular(22)),
-                  child: Text('Login'),
+                  child: const Text('Login'),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 12,
               ),
               InkWell(
@@ -121,14 +125,14 @@ class _SignUpPageState extends State<SignUpPage> {
                   Navigator.pop(context);
                 },
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 33, vertical: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 33, vertical: 8),
                   decoration: BoxDecoration(
                       color: Colors.blue,
                       border: Border.all(color: Colors.yellow),
-                      borderRadius: BorderRadius.circular(22)),
-                  child: Text('Sign In'),
+                      borderRadius: BorderRadius.circular(22),),
+                  child: const Text('Sign In'),
                 ),
-              )
+              ),
             ],
           ),
         ),

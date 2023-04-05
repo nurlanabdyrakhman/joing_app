@@ -28,6 +28,6 @@ class MyApp extends StatelessWidget {
            actionsIconTheme: IconThemeData(color: Colors.cyan)
           ),
         ),
-        home:  HomeView(),);
+        home:  SignInPage(),);
   }
 }

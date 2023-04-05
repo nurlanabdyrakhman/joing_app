@@ -59,7 +59,7 @@ class _SignInPageState extends State<SignInPage> {
                 'Wellcome',
                 style: TextStyle(fontSize: 45, color: Colors.black),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 52,
               ),
               Row(
@@ -154,12 +154,12 @@ class _SignInPageState extends State<SignInPage> {
                             backgroundColor: Colors.brown,
                             child: Icon(Icons.arrow_forward),
                           ),
-                        )
+                        ),
                       ],
                     )
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
