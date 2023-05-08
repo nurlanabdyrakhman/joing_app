@@ -15,16 +15,25 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  TextEditingController emailController = TextEditingController();
-
-  TextEditingController passwordController = TextEditingController();
-  @override
-  void dispose() {
-    super.dispose();
-    emailController.dispose();
-    passwordController.dispose();
+  onCangetpage(BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        changeButton=false;
+      });
+      await Future.delayed(
+        Duration(seconds: 1),
+      );
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SignUpPage(),
+        ),
+      );
+    }
   }
-
+  bool changeButton = false;
+  String email = '';
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,127 +49,135 @@ class _SignInPageState extends State<SignInPage> {
       ),
       body: Center(
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                child: const CircleAvatar(
-                  radius: 45,
-                  child: Icon(
-                    Icons.task,
-                    size: 45,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  child: const CircleAvatar(
+                    radius: 45,
+                    child: Icon(
+                      Icons.task,
+                      size: 45,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              const Text(
-                'Wellcome',
-                style: TextStyle(fontSize: 45, color: Colors.black),
-              ),
-              const SizedBox(
-                height: 52,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  iconCircule(
-                    color: Colors.blue,
-                    child: Icon(
-                      Icons.man,
-                      color: Colors.brown,
-                    ),
-                  ),
-                  iconCircule(
-                    color: Colors.yellow,
-                    child: Icon(
-                      Icons.woman,
-                      color: Colors.brown,
-                    ),
-                  ),
-                  iconCircule(
-                    color: Colors.green,
-                    child: Icon(
-                      Icons.family_restroom,
-                      color: Colors.brown,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  children: [
-                    TextField(
-                      controller: emailController,
-                      decoration: InputDecoration(
-                        hintText: 'Email',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        fillColor: Colors.blue,
-                        filled: true,
+                const SizedBox(
+                  height: 12,
+                ),
+                const Text(
+                  'Wellcome',
+                  style: TextStyle(fontSize: 45, color: Colors.black),
+                ),
+                const SizedBox(
+                  height: 52,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    iconCircule(
+                      color: Colors.blue,
+                      child: Icon(
+                        Icons.man,
+                        color: Colors.brown,
                       ),
                     ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    TextFormField(
-                      controller: passwordController,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        hintText: 'Password',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        fillColor: Colors.blue,
-                        filled: true,
+                    iconCircule(
+                      color: Colors.yellow,
+                      child: Icon(
+                        Icons.woman,
+                        color: Colors.brown,
                       ),
                     ),
-                    const SizedBox(
-                      height: 22,
+                    iconCircule(
+                      color: Colors.green,
+                      child: Icon(
+                        Icons.family_restroom,
+                        color: Colors.brown,
+                      ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        const Text(
-                          'Sign In',
-                          style: TextStyle(
-                            color: Colors.brown,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            FirebaseAuth.instance
-                                .createUserWithEmailAndPassword(
-                              email: emailController.text.trim(),
-                              password: passwordController.text.trim(),
-                            );
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SignUpPage(),
-                              ),
-                            );
-                          },
-                          child: const CircleAvatar(
-                            radius: 18,
-                            backgroundColor: Colors.brown,
-                            child: Icon(Icons.arrow_forward),
-                          ),
-                        ),
-                      ],
-                    )
                   ],
                 ),
-              ),
-            ],
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        decoration: InputDecoration(
+                          hintText: 'Email',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          fillColor: Colors.blue,
+                          filled: true,
+                        ),
+                        validator: (val) {
+                          if (val!.isEmpty) {
+                            return 'Email adresine gir';
+                          }
+                          return null;
+                        },
+                        onChanged: (val) {
+                          setState(() {
+                            email = val;
+                          });
+                        },
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      TextFormField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          hintText: 'Password',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          fillColor: Colors.blue,
+                          filled: true,
+                        ),
+                        validator: (val) {
+                          if (val!.isEmpty) {
+                            return 'Password  şifre ile girmeli';
+                          } else if (val.length < 7) {
+                            return 'Şifre uzunluğu en az 6 olmalidir';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 22,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          const Text(
+                            'Sign In',
+                            style: TextStyle(
+                              color: Colors.brown,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () => onCangetpage(context),
+                            child: const CircleAvatar(
+                              radius: 18,
+                              backgroundColor: Colors.brown,
+                              child: Icon(Icons.arrow_forward),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
